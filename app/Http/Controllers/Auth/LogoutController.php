@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class RegisterController extends Controller
+class LogoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +21,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return view('user.auth.register');
+        //
     }
 
     /**
@@ -32,31 +29,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * Validation
-         */
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        /**
-         * Database Insertion
-         */
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-
-        /**
-         * User auth - login
-         */
-        Auth::login($user);
-
-        return redirect('dashboard');
+        //
     }
 
     /**
@@ -86,8 +59,13 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
