@@ -11,6 +11,9 @@ Route::get('/', function () {
 
 Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [UserController::class, 'userRegister']);
+Route::get('/login', [UserController::class, 'showloginForm'])->name('login');
+Route::post('/login', [UserController::class, 'userlogin']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -20,9 +23,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/login', function () {
-    return view('user.auth.login');
-})->name('login');
 
 Route::get('/account-recovery', function () {
     return view('user.account_recovery');

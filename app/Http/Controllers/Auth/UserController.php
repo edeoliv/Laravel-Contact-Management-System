@@ -60,7 +60,27 @@ class UserController extends Controller
     }
 
     /**
-     * Destroy User session and redirect to home page.
+     * Login | Create User session and redirect to dashboard.
+     *
+     * @param Request $request
+     * @return redirect
+     */
+    public function userLogin(Request $request)
+    {
+        $credentials = $request->only([
+            'email',
+            'password',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            return redirect('dashboard');
+        }
+
+        return redirect('login')->with('error', 'Invalid credentials. Please try again.');
+    }
+
+    /**
+     * Logout | Destroy User session and redirect to login page.
      *
      * @param Request $request
      * @return redirect
@@ -72,6 +92,6 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('login');
     }
 }
