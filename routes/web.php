@@ -13,3 +13,11 @@ Route::get('/register', function () {
 Route::get('/login', function () {
     return view('account.login');
 });
+
+Route::get('/account-recovery', function () {
+    return view('account.account_recovery');
+});
+
+Route::get('/reset-password', function () {
+    return view('account.reset_password');
+});
