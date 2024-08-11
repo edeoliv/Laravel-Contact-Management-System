@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('page_title') | CMS</title>
+    <title>Dashboard - @yield('page_title') | CMS</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>
-    @yield('content')
+    <div class="antialiased bg-gray-50 dark:bg-gray-900">
+        @include('dashboard.partials.navbar')
+        @include('dashboard.partials.sidebar')
+        @yield('main_content')
+    </div>
 </body>
 </html>

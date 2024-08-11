@@ -21,3 +21,7 @@ Route::get('/account-recovery', function () {
 Route::get('/reset-password', function () {
     return view('user.reset_password');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard.home');
+});
