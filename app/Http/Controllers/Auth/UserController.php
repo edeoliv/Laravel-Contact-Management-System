@@ -72,7 +72,9 @@ class UserController extends Controller
             'password',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $request->session()->regenerate();
+
             return redirect('dashboard');
         }
 
