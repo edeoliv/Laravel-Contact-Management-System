@@ -7,17 +7,17 @@ Route::get('/', function () {
 });
 
 Route::get('/register', function () {
-    return view('account.register');
+    return view('user.register');
 });
 
 Route::get('/login', function () {
-    return view('account.login');
+    return view('user.login');
 });
 
 Route::get('/account-recovery', function () {
-    return view('account.account_recovery');
+    return view('user.account_recovery');
 });
 
 Route::get('/reset-password', function () {
-    return view('account.reset_password');
+    return view('user.reset_password');
 });
