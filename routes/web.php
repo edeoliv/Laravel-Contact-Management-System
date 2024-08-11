@@ -1,19 +1,23 @@
 <?php
 
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 
-Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [UserController::class, 'userRegister']);
-Route::get('/login', [UserController::class, 'showloginForm'])->name('login');
-Route::post('/login', [UserController::class, 'userlogin']);
+Route::middleware(['guest'])->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        // GET ROUTES
+        Route::get('/register', 'showRegisterForm')->name('register');
+        Route::get('/login', 'showloginForm')->name('login');
 
+        // POST ROUTES
+        Route::post('/register', 'userRegister');
+        Route::post('/login', 'userlogin');
+    });
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
