@@ -12,6 +12,8 @@ Route::middleware(['guest'])->group(function () {
         // GET ROUTES
         Route::get('/register', 'showRegisterForm')->name('register');
         Route::get('/login', 'showloginForm')->name('login');
+        Route::get('/account-recovery', 'showAccountRecoveryForm')->name('account_recovery');
+        Route::get('/reset-password', 'showResetPasswordForm')->name('reset_password');
 
         // POST ROUTES
         Route::post('/register', 'userRegister');
@@ -24,14 +26,4 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard.home');
     });
     Route::post('/logout', [UserController::class, 'userLogout'])->name('logout');
-});
-
-
-
-Route::get('/account-recovery', function () {
-    return view('user.account_recovery');
-});
-
-Route::get('/reset-password', function () {
-    return view('user.reset_password');
 });

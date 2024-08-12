@@ -31,6 +31,26 @@ class UserController extends Controller
     }
 
     /**
+     * Return the account_recovery view.
+     *
+     * @return view
+     */
+    public function showAccountRecoveryForm()
+    {
+        return view('user.auth.account_recovery');
+    }
+
+    /**
+     * Return the reset_password view.
+     *
+     * @return view
+     */
+    public function showResetPasswordForm()
+    {
+        return view('user.auth.reset_password');
+    }
+
+    /**
      * Store created User in database and redirect to login page.
      *
      * @param Request $request
