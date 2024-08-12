@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('page_title') | CMS</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/0527a7a8a4.js" crossorigin="anonymous"></script>
 </head>
 <body>
     @yield('content')
