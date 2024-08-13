@@ -2,10 +2,12 @@
 export default {
   darkMode: 'class',
   content: [
+    './vendor/usernotnull/tall-toasts/config/**/*.php',
+    './vendor/usernotnull/tall-toasts/resources/views/**/*.blade.php',
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
-    "./node_modules/flowbite/**/*.js"
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {

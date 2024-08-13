@@ -8,10 +8,16 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>
+    <!-- Laravel Toast -->
+    <livewire:toasts />
+    
     <div class="antialiased bg-gray-50 dark:bg-gray-900">
         @include('dashboard.partials.navbar')
         @include('dashboard.partials.sidebar')
         @yield('main_content')
     </div>
+
+    <!-- Laravel Toast -->
+    @livewireScriptConfig
 </body>
 </html>

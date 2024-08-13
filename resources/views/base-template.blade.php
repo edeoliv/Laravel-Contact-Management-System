@@ -10,6 +10,12 @@
     <script src="https://kit.fontawesome.com/0527a7a8a4.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Laravel Toast -->
+    <livewire:toasts />
+
     @yield('content')
+    
+    <!-- Laravel Toast -->
+    @livewireScriptConfig
 </body>
 </html>

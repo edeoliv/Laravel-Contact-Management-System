@@ -80,7 +80,12 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect('login')->with('success', 'Registration successful! Please log in.');
+        toast()->success(
+            message: 'Please log in.',
+            title: 'Registration successful!',
+        )->pushOnNextPage();
+
+        return redirect('login');
     }
 
     /**
@@ -98,11 +103,22 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
+            $userName = Auth::user()->name;
+
+            toast()->success(
+                message: "$userName, This is the Dashboard",
+                title: 'Be Welcome!'
+            )->pushOnNextPage();
 
             return redirect('dashboard');
         }
 
-        return redirect('login')->with('error', 'Invalid credentials. Please try again.');
+        toast()->danger(
+            message: 'Please try again.',
+            title: 'Invalid credentials',
+        )->push();
+
+        return redirect('login');
     }
 
     /**
@@ -117,6 +133,11 @@ class UserController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        toast()->success(
+            message: 'Come back often',
+            title: 'Logout successful',
+        )->pushOnNextPage();
 
         return redirect('login');
     }
@@ -137,13 +158,21 @@ class UserController extends Controller
             $request->only('email')
         );
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with([
-                'status' => __($status),
-            ])
-            : back()->withErrors([
-                'email' => __($status),
-            ]);
+        if ($status === Password::RESET_LINK_SENT) {
+            toast()->success(
+                message: __($status),
+                title: 'Forgot Password',
+            )->pushOnNextPage();
+
+            return back();
+        }
+
+        toast()->danger(
+            message: __($status),
+            title: 'Forgot Password',
+        )->pushOnNextPage();
+
+        return back();
     }
 
     /**
@@ -173,8 +202,20 @@ class UserController extends Controller
             }
         );
 
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        if ($status === Password::PASSWORD_RESET) {
+            toast()->success(
+                message: __($status),
+                title: 'Reset Password',
+            )->pushOnNextPage();
+
+            return redirect()->route('login');
+        }
+
+        toast()->danger(
+            message: __($status),
+            title: 'Forgot Password',
+        )->pushOnNextPage();
+
+        return back();
     }
 }
