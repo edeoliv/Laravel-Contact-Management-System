@@ -12,8 +12,8 @@
     <livewire:toasts />
     
     <div class="antialiased bg-gray-50 dark:bg-gray-900">
-        @include('dashboard.partials.navbar')
-        @include('dashboard.partials.sidebar')
+        @include('dashboard.include.navbar')
+        @include('dashboard.include.sidebar')
         @yield('main_content')
     </div>
 
